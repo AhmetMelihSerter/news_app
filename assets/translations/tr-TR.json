@@ -1,0 +1,22 @@
+{
+    "home": {
+        "home_view": {
+            "bottom_navigation": {
+                "item_news": "Haberler",
+                "item_favorites": "Favoriler"
+            }
+        },
+        "news_view": {
+            "text_field_search": "Arama"
+        },
+        "favorites_view": {
+            "app_bar_title": "Favoriler"
+        },
+        "news_detail_view": {
+            "news_source_button": "Haber Kaynağı"
+        },
+        "news_source_view": {
+            "app_bar_title": "Haber Kaynağı"
+        }
+    }
+}

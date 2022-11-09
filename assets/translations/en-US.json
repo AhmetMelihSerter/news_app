@@ -1,0 +1,22 @@
+{
+    "home": {
+        "home_view": {
+            "bottom_navigation": {
+                "item_news": "News",
+                "item_favorites": "Favorites"
+            }
+        },
+        "news_view": {
+            "text_field_search": "Search"
+        },
+        "favorites_view": {
+            "app_bar_title": "Favorites"
+        },
+        "news_detail_view": {
+            "news_source_button": "News Source"
+        },
+        "news_source_view": {
+            "app_bar_title": "News Source"
+        }
+    }
+}
