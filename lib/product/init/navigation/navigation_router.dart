@@ -1,80 +1,29 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:news_app/feature/_model/articles_model.dart';
+import 'package:news_app/feature/dashboard/_dashboard/dashboard_view.dart';
 
-import '../../../feature/favorites/view/favorites_view.dart';
-import '../../../feature/home/view/home_view.dart';
-import '../../../feature/news/news_detail/view/news_detail_view.dart';
-import '../../../feature/news/news_source/view/news_source_view.dart';
-import '../../../feature/news/news_sub/view/news_view.dart';
-import '../../../feature/splash/view/splash_view.dart';
-import '../../constants/navigation/navigation_constants.dart';
+import 'package:news_app/feature/dashboard/favorites/view/favorites_view.dart';
+import 'package:news_app/feature/dashboard/news/_news/view/news_view.dart';
+import 'package:news_app/feature/dashboard/news/news_detail/view/news_detail_view.dart';
+import 'package:news_app/feature/dashboard/news/news_source/view/news_source_view.dart';
+import 'package:news_app/feature/splash/view/splash_view.dart';
 
-class NavigationRouter {
-  static NavigationRouter? _instance;
+part 'navigation_router.gr.dart';
 
-  static NavigationRouter get instance => _instance ??= NavigationRouter._internal();
-
-  NavigationRouter._internal();
-
-  Route<dynamic> onGenerateRoute(RouteSettings? settings) {
-    switch (settings!.name) {
-      case NavigationConstants.splashRoute:
-        return _normalNavigate(
-          view: const SplashView(),
-          pageName: NavigationConstants.splashRoute,
-          settings: settings,
-        );
-      case NavigationConstants.homeRoute:
-        return _normalNavigate(
-          view: const HomeView(),
-          pageName: NavigationConstants.homeRoute,
-          settings: settings,
-        );
-      case NavigationConstants.newsRoute:
-        return _normalNavigate(
-          view: const NewsView(),
-          pageName: NavigationConstants.newsRoute,
-          settings: settings,
-        );
-      case NavigationConstants.favoritesRoute:
-        return _normalNavigate(
-          view: const FavoritesView(),
-          pageName: NavigationConstants.favoritesRoute,
-          settings: settings,
-        );
-      case NavigationConstants.newsDetailRoute:
-        return _normalNavigate(
-          view: const NewsDetailView(),
-          pageName: NavigationConstants.newsDetailRoute,
-          settings: settings,
-        );
-      case NavigationConstants.newsSourceRoute:
-        return _normalNavigate(
-          view: const NewsSourceView(),
-          pageName: NavigationConstants.newsSourceRoute,
-          settings: settings,
-        );
-      default:
-        return _normalNavigate(
-          view: const SplashView(),
-          pageName: NavigationConstants.homeRoute,
-          settings: settings,
-        );
-    }
-  }
-
-  MaterialPageRoute _normalNavigate({
-    required Widget view,
-    required String pageName,
-    bool fullscreenDialog = false,
-    RouteSettings? settings,
-  }) {
-    return MaterialPageRoute(
-      builder: (context) => view,
-      fullscreenDialog: fullscreenDialog,
-      settings: RouteSettings(
-        name: pageName,
-        arguments: settings!.arguments,
-      ),
-    );
-  }
+@AutoRouterConfig(replaceInRouteName: 'View,Route')
+class NavigationRouter extends _$NavigationRouter {
+  @override
+  List<AutoRoute> get routes => [
+        AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(
+          page: DashboardRoute.page,
+          children: [
+            AutoRoute(page: NewsRoute.page, initial: true),
+            AutoRoute(page: FavoritesRoute.page, maintainState: false),
+          ],
+        ),
+        AutoRoute(page: NewsDetailRoute.page),
+        AutoRoute(page: NewsSourceRoute.page),
+      ];
 }

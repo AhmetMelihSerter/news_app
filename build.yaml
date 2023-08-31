@@ -1,0 +1,39 @@
+targets:
+  $default:
+    builders:
+      auto_route_generator|auto_route_generator:
+        enabled: true
+        generate_for:
+          include:
+            - lib/feature/**_view.dart
+      auto_route_generator:auto_router_generator:
+        enabled: true
+        generate_for:
+          include:
+            - lib/product/init/navigation/navigation_router.dart
+      json_serializable:
+        enabled: true
+        generate_for:
+          include:
+            - lib/**/model/**_model.dart
+            - lib/**/_model/**_model.dart
+            - lib/**_params.dart
+            - lib/**_request.dart
+            - lib/**_response.dart
+      injectable_generator:injectable_builder:
+        enabled: true
+        generate_for:
+          include:
+            - lib/product/init/interceptor/app_interceptor.dart
+            - lib/**_view_model.dart
+            - lib/**_service.dart
+            - lib/**_manager.dart
+        options:
+          auto_register: true
+          class_name_pattern: "ViewModel$"
+          file_name_pattern: "_view_model$"
+      injectable_generator|injectable_config_builder:
+        enabled: true
+        generate_for:
+          include:
+            - lib/product/init/startup/startup_manager.dart

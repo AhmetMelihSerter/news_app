@@ -1,19 +1,21 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-import '../../../core/base/view/base_view.dart';
-import '../view_model/splash_view_model.dart';
+import 'package:news_app/core/base/view/base_view.dart';
+import 'package:news_app/feature/splash/view_model/splash_view_model.dart';
 
+@RoutePage()
 class SplashView extends StatelessWidget {
-  const SplashView({Key? key}) : super(key: key);
+  const SplashView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BaseView<SplashViewModel>(
-      viewModel: SplashViewModel(),
       onModelReady: (viewModel) {
-        viewModel.setContext(context);
-        viewModel.init();
+        viewModel
+          ..setContext(context)
+          ..init();
       },
       onPageBuilder: (context, viewModel) {
         return Scaffold(
@@ -26,7 +28,7 @@ class SplashView extends StatelessWidget {
   Widget _buildBody(BuildContext context) {
     return Center(
       child: FlutterLogo(
-        size: context.dynamicWidth(.5),
+        size: context.sized.dynamicHeight(.5),
       ),
     );
   }

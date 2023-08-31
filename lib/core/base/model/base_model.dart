@@ -1,3 +1,4 @@
-import 'package:vexana/vexana.dart';
-
-abstract class BaseModel<T> extends INetworkModel<T> {}
+abstract class BaseModel<T> {
+  Map<String, dynamic> toJson();
+  T fromJson(Map<String, dynamic> json);
+}

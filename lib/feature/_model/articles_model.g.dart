@@ -3,6 +3,39 @@
 part of 'articles_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class ArticlesModelAdapter extends TypeAdapter<ArticlesModel> {
+  @override
+  final int typeId = 2;
+
+  @override
+  ArticlesModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ArticlesModel();
+  }
+
+  @override
+  void write(BinaryWriter writer, ArticlesModel obj) {
+    writer.writeByte(0);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ArticlesModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
@@ -15,7 +48,7 @@ ArticlesModel _$ArticlesModelFromJson(Map<String, dynamic> json) =>
       title: json['title'] as String?,
       description: json['description'] as String?,
       url: json['url'] as String?,
-      urlToImage: json['urlToImage'] as String?,
+      urlToImage: ArticlesModel._clearHttp(json['urlToImage'] as String?),
       publishedAt: json['publishedAt'] as String?,
       content: json['content'] as String?,
     );

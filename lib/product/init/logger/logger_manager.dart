@@ -1,15 +1,12 @@
+import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
 
-import '../../../core/init/logger/i_logger_manager.dart';
+import 'package:news_app/core/init/logger/i_logger_manager.dart';
+import 'package:news_app/product/init/logger/log_filter_manager.dart';
 
-class LoggerManager implements ILoggerManager {
-  static LoggerManager? _instance;
-
-  static LoggerManager get instance => _instance ??= LoggerManager._internal();
-
-    final Logger _logger;
-
-  LoggerManager._internal()
+@Singleton(as: ILoggerManager)
+class LoggerManager extends ILoggerManager {
+  LoggerManager()
       : _logger = Logger(
           printer: PrettyPrinter(
             methodCount: 1,
@@ -17,36 +14,38 @@ class LoggerManager implements ILoggerManager {
             lineLength: 50,
             printTime: true,
           ),
-          level: Level.warning,
+          filter: LogFilterManager(),
         );
 
+  final Logger _logger;
+
   @override
-  void debug(String message, [error, StackTrace? stackTrace]) {
-    _logger.d(message, error, stackTrace);
+  void debug(String message, [StackTrace? stackTrace]) {
+    _logger.d(message, null, stackTrace);
   }
 
   @override
-  void error(String message, [error, StackTrace? stackTrace]) {
-    _logger.e(message, error, stackTrace);
+  void error(String message, [StackTrace? stackTrace]) {
+    _logger.e(message, null, stackTrace);
   }
 
   @override
-  void info(String message, [error, StackTrace? stackTrace]) {
-    _logger.i(message, error, stackTrace);
+  void info(String message, [StackTrace? stackTrace]) {
+    _logger.i(message, null, stackTrace);
   }
 
   @override
-  void verbose(String message, [error, StackTrace? stackTrace]) {
-    _logger.v(message, error, stackTrace);
+  void verbose(String message, [StackTrace? stackTrace]) {
+    _logger.v(message, null, stackTrace);
   }
 
   @override
-  void warning(String message, [error, StackTrace? stackTrace]) {
-    _logger.w(message, error, stackTrace);
+  void warning(String message, [StackTrace? stackTrace]) {
+    _logger.w(message, null, stackTrace);
   }
 
   @override
-  void whtf(String message, [error, StackTrace? stackTrace]) {
-    _logger.wtf(message, error, stackTrace);
+  void whtf(String message, [StackTrace? stackTrace]) {
+    _logger.wtf(message, null, stackTrace);
   }
 }

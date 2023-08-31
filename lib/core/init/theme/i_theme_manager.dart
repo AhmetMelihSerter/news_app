@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
 abstract class IThemeManager {
-  ThemeData get getTheme;
+  ThemeData get defaultTheme;
+  ThemeData get darkTheme;
 }

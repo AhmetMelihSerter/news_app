@@ -1,13 +1,13 @@
 abstract class ILoggerManager {
-  void verbose(String message, [dynamic error, StackTrace? stackTrace]);
+  void verbose(String message, [StackTrace? stackTrace]);
 
-  void debug(String message, [dynamic error, StackTrace? stackTrace]);
+  void debug(String message, [StackTrace? stackTrace]);
 
-  void info(String message, [dynamic error, StackTrace? stackTrace]);
+  void info(String message, [StackTrace? stackTrace]);
 
-  void warning(String message, [dynamic error, StackTrace? stackTrace]);
+  void warning(String message, [StackTrace? stackTrace]);
 
-  void error(String message, [dynamic error, StackTrace? stackTrace]);
+  void error(String message, [StackTrace? stackTrace]);
 
-  void whtf(String message, [dynamic error, StackTrace? stackTrace]);
+  void whtf(String message, [StackTrace? stackTrace]);
 }

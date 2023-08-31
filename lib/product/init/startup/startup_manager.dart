@@ -1,23 +1,33 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_it/get_it.dart';
+import 'package:injectable/injectable.dart';
+import 'package:news_app/core/init/secure/i_secure_manager.dart';
+import 'package:news_app/core/init/storage/i_storage_manager.dart';
+import 'package:news_app/product/init/startup/startup_manager.config.dart';
 
-import '../storage/shared_pref_manager.dart';
+final getIt = GetIt.instance;
+
+@InjectableInit(
+  initializerName: 'init',
+)
+void getItInitialize() => getIt.init();
 
 class StartupManager {
-  static final StartupManager _instance = StartupManager._internal();
-
-  static StartupManager get instance => _instance;
-
-  StartupManager._internal();
-
-  Future<void> initialize() async {
+  static Future<void> initialize() async {
     /// EasyLocalization Initialize
     await EasyLocalization.ensureInitialized();
 
     /// DotEnv Initialize
-    await dotenv.load(fileName: '.env');
+    await dotenv.load();
+
+    /// GetIt Initialize
+    getItInitialize();
+
+    /// SecureManager Initialize
+    await getIt<ISecureManager>().initialize();
 
     /// StorageManager Initialize
-    await SharedPrefManager.instance.initialize();
+    await getIt<IStorageManager>().initialize();
   }
 }

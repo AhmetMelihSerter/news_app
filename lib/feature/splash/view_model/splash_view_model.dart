@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kartal/kartal.dart';
 
-import '../../../core/base/view_model/base_view_model.dart';
-import '../../../product/constants/navigation/navigation_constants.dart';
+import 'package:news_app/core/base/view_model/base_view_model.dart';
 
 class SplashViewModel extends BaseViewModel {
   @override
@@ -11,11 +10,11 @@ class SplashViewModel extends BaseViewModel {
   @override
   void init() {
     Future.microtask(() {
-      Future.delayed(viewModelContext.durationSlow, _onNavigateHome);
+      Future.delayed(viewModelContext.duration.durationSlow, _onNavigateHome);
     });
   }
 
   void _onNavigateHome() {
-    viewModelContext.navigateToReset(NavigationConstants.homeRoute);
+    navigationService.navigateHome();
   }
 }

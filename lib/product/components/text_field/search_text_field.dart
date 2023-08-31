@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
 class SearchTextField extends StatelessWidget {
-  final ValueSetter<String>? onChanged;
-  final TextEditingController? controller;
-  final VoidCallback? onClear;
-  final String? hintText;
-
   const SearchTextField({
-    Key? key,
+    super.key,
     this.onChanged,
     this.controller,
     this.onClear,
     this.hintText,
-  }) : super(key: key);
+  });
+  
+  final ValueSetter<String>? onChanged;
+  final TextEditingController? controller;
+  final VoidCallback? onClear;
+  final String? hintText;
 
   @override
   Widget build(BuildContext context) {
